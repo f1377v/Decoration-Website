@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='aos.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='decoration.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <style>
+    .khoshgel-box {
+        background:#ffa0a0;
+        outline: none;
+        border-color: #ffcb49;
+        border-radius: 5px;
+        }
+    .khoshgel-box:hover {
+    box-shadow: 0px 0px 40px #ffcb49;
+    border-radius: 20px;
+        }
+    body {
+    background-image: url("https://d18178273alp6b.cloudfront.net/production/hs-acacia-cognac-angle-1000-1-.jpg");
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 100%;
+    }
+
+    .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+  </style>
+  <!--/images/hs-acacia-cognac-angle-1000-1-.jpg -->
+
+  <title> {{title}} </title>
+</head>
+<body>
+<div class="container">
+  <div style="margin-top:20%;"></div>
+  <div class="row ustify-content-around">
+      <div class="col-md-4" style ="padding-right:7.5%;">
+        <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="1200" class="khoshgel-box" style="padding:0px 0px 0px 0px">
+          <a href="{{ url_for('decorations') }}" >
+              <img src="/images/paper-based-materials-laser-cutting-engraving-marking_v1.jpg" style="height:125px; width:250px; margin-left:4%; margin-top:4%; margin-bottom:2.5%">
+          </a>                                                                                <!-- 125,  margin-left:10px; margin-top:10px; margin-bottom:5px -->                  
+          <br>
+          <a href="{{ url_for('decorations') }}" style="margin-left:19%"><i style="font-weight: 600">Decorations</i></a>
+        </div>
+      </div>
+
+      <div class="col-md-4 text-center">
+          <br><br><br>
+         <strong> Company logo </strong>
+      </div>
+
+      <div class="col-md-4" style ="padding-right:7.5%;">
+        <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="1200" class="khoshgel-box" style="padding:0px 0px 0px 0px">
+        <div class="popup" onclick="myFunction()">
+          <span class="popuptext" id="myPopup">This part is under construction!</span>  
+          <a href="#" >
+              <img src="/images/wood-fibre-boards-timber-parquet-backgrounds-textures-fdcace-1024.jpg" style="height:125px; width:250px; margin-left:4%; margin-top:4%; margin-bottom:2.5%;">
+          </a>
+          <br>
+          <a href="#" style="margin-left:30px"><i style="margin-left:19%; font-weight: 600">Materials</i></a>
+        </div>
+        </div>
+      </div>
+  </div>
+</div>
+<script src="{{url_for('static', filename='aos.js')}}"></script>
+<script>AOS.init();</script>
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+</body>
+</html>

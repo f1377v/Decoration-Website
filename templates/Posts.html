@@ -1,0 +1,193 @@
+  <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='aos.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='flag-icon.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='decoration.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <style>
+    .nav-link:hover {
+        background-color:#ffd738;
+        color:white !important;
+        }
+
+    .active{
+        background-color:#ffd738;
+    }
+
+    .dropdown-item:hover{
+        background-color:#ffd738;
+    }
+    .khoshgel-box {
+        background:#e48dfc;
+        transition: transform .2s; /* Animation */
+        outline: none;
+        border-color: #e48dfc;
+        border-radius: 5px;
+        }
+    .khoshgel-box:hover {
+        box-shadow: 0px 0px 20px #ff26d7;
+        -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.1);
+        }
+    .column {
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+        padding: 20px;
+        }
+    .Row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+    .includes {
+        border-radius: 5px;
+        background-color: #f8f9fa!important;
+        padding: 10px;
+        }
+
+    .reflexive-center {
+        margin-left:10%;
+        margin-right:10%;
+        }
+
+    .article-metadata {
+        padding-bottom: 1px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid #e3e3e3
+        }
+
+    .article-content {
+        white-space: pre-line;
+        }
+
+    .article-img {
+        height: 125px;
+        width: 125px;
+        margin-right: 16px;
+        }
+
+    #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 500px;  /* The width is the width of the web page */
+        border-radius: 50%;
+       }
+  </style>
+  
+  <title> {{title}} </title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item " style="margin-right:5px">
+        <a class="nav-link" href="{{ url_for('decorations') }}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('Offers') }}">Offers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('ContactUs') }}">Contact Us</a>
+      </li>
+      <li class="nav-item">
+        {% if current_user.is_authenticated %}
+            <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+        {% endif %}
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="margin-left:10cm" href="#" id="navbarDropdown" data-toggle="dropdown">
+          <span class="flag-icon flag-icon-gb flag-icon-squared"></span>
+        </a>
+        <div style="background-color:white; margin-left:10cm" class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" ><span class="flag-icon flag-icon-gb flag-icon-squared"></span>English</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"><span class="flag-icon flag-icon-nl flag-icon-squared"></span>Nederlands</a>
+        </div>
+      </li>
+    </ul>
+<form action="{{ url_for('Find') }}" method="POST">
+    {{form2.hidden_tag()}}
+    <fieldset class="form-inline my-2 my-lg-0">
+        <div class="form-inline my-2 my-lg-0">
+            <!-- {{form2.keywords.label(class="form-control-label mr-sm-2")}} -->
+            <!-- {% if form2.keywords.errors %}
+                {{ form2.keywords(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form2.keywords.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %} -->
+            {{ form2.keywords(class="form-control form-control-lg") }}
+            <!-- {% endif %} -->
+                </div>
+         </div>
+     </fieldset>
+          <div>
+         {{ form2.submit2(class="btn btn-outline-success mx-2 my-2 my-sm-0") }}
+          </div>
+    </form>
+</nav>
+<br>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<br>
+
+{% for post in posts %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ post.image_file }}">
+          <div class="media-body">
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <div class="article-metadata">
+              <span class="mr-2" href="#">{{ post.category }}</span>
+              <small class="text-muted">${{ post.price }} per SQ.F</small>
+            </div>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+{% endfor %}
+
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: 52.358095, lng: 4.956936};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 8, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm0ZHNBRqGaLQZmcToRBLz4fy_RnJeh_4&callback=initMap">
+    </script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="{{url_for('static', filename='slideshow.js')}}"></script>
+</body>
+</html>

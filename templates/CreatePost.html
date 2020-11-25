@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='aos.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='flag-icon.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='decoration.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <style>
+    .nav-link:hover {
+        background-color:#ffd738;
+        color:white !important;
+        }
+
+    .active{
+        background-color:#ffd738;
+    }
+
+    .dropdown-item:hover{
+        background-color:#ffd738;
+    }
+    .khoshgel-box {
+        background:#e48dfc;
+        transition: transform .2s; /* Animation */
+        outline: none;
+        border-color: #e48dfc;
+        border-radius: 5px;
+        }
+    .khoshgel-box:hover {
+        box-shadow: 0px 0px 20px #ff26d7;
+        -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.1);
+        }
+    .column {
+        float: left;
+        width: 50%;
+        margin-top: 6px;
+        padding: 20px;
+        }
+    .Row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+    .includes {
+        border-radius: 5px;
+        background-color: #f8f9fa!important;
+        padding: 10px;
+        }
+
+    .reflexive-center {
+        margin-left:10%;
+        margin-right:10%;
+        }
+
+    #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 500px;  /* The width is the width of the web page */
+        border-radius: 50%;
+       }
+  </style>
+  <body>
+  <div>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form1.hidden_tag() }}
+            <fieldset class="form-group reflexive-center">
+                <legend class="border-bottom mb-4">Create Post</legend>
+                <div class="form-group reflexive-center">
+                    {{ form1.category.label(class="form-control-label") }}
+                    {{ form1.category(class="form-control") }}
+                <br>
+                <div class="form-group reflexive-center">
+                    {{ form1.title.label(class="form-control-label") }}
+                    {{ form1.title(class="form-control") }}
+                </div>
+                <div class="form-group reflexive-center">
+                    {{ form1.content.label(class="form-control-label") }}
+                    {{ form1.content(class="form-control") }}
+                </div>
+                <div class="form-group reflexive-center">
+                    {{ form1.price.label(class="form-control-label") }}
+                    {{ form1.price(class="form-control") }}
+                </div>
+                <div class="form-group reflexive-center">
+                    {{ form1.sale.label(class="form-control-label") }}
+                    {{ form1.sale(class="form-control") }}
+                </div>
+            </fieldset>
+                <div class="form-group">
+                    {{ form1.picture.label() }}
+                    {{ form1.picture(class="form-control-file") }}
+                    {% if form1.picture.errors %}
+                        {% for error in form1.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            <div class="form-group reflexive-center">
+                {{ form1.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    </body>
+    </html>
